@@ -1,0 +1,17 @@
+{
+  "name": "play-web-socket",
+  "version": "0.0.1",
+  "description": "demo for web socket",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "EnixCoda",
+  "license": "ISC",
+  "repository": {},
+  "dependencies": {
+    "ws": "^3.0.0",
+    "wscat": "^2.0.1"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "chatroom",
+  "version": "0.0.1",
+  "description": "a simple chat room demo built upon React and WebSocket",
+  "main": "index.js",
+  "scripts": {
+    "start": "node_modules/webpack-dev-server/bin/webpack-dev-server.js"
+  },
+  "repository": {},
+  "author": "EnixCoda <enixcoda@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.5.2",
+    "babel-preset-react": "^6.24.1",
+    "html-webpack-plugin": "^2.28.0",
+    "react": "^15.6.0",
+    "react-dom": "^15.6.0",
+    "react-hot-loader": "next",
+    "react-redux": "^5.0.5",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5",
+    "ws": "^3.0.0"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "semi": false,
+    "trailingComma": "es5"
+  }
+}
