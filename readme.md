@@ -10,4 +10,3 @@ CLIENT                     Message instance <-> JSON <-> ws <-> JSON <-> Message
 ```
 
 All instances are created at server-side and serializable, rebuilt at client-side.
-
