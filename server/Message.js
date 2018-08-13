@@ -20,7 +20,7 @@ class Message {
   toString() {
     if (this.stringified === null) {
       this.stringified = JSON.stringify({
-        user: `${this.user}`, // invoke toString magic
+        user: `${this.user.name}`, // invoke toString magic
         content: `${this.content}`,
         type: `${this.type}`,
       })

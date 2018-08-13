@@ -1,4 +1,3 @@
-const webpack = require('webpack')
 const path = require('path')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 
@@ -8,23 +7,21 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
+  mode: 'development',
+  devtool: 'eval-source-map',
   module: {
     rules: [
-      {
-        test: /.*\.js$/,
-        loader: 'react-hot-loader/webpack',
-      },
       {
         test: /.*\.js$/,
         loader: 'babel-loader',
         options: {
           presets: ['react']
-        }
+        },
+        include: path.resolve(__dirname, 'src')
       }
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new HTMLWebpackPlugin({
       hash: true,
       template: './src/index.html'

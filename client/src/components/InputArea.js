@@ -1,24 +1,22 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import Speaker from '../Speaker'
 
 export default class InputArea extends Component {
   componentWillMount() {
     this.setState({
-      words: ''
+      message: '',
     })
   }
 
   submitMessage() {
-    const {words} = this.state
-    this.props.speaker.speak(words)
+    const { message } = this.state
+    this.props.speak(message)
     this.setState({
-      words: ''
+      message: '',
     })
   }
 
   render() {
-    const {speaker} = this.props
+    const { disabled, actionText, hintText } = this.props
     return (
       <div
         style={{
@@ -26,9 +24,9 @@ export default class InputArea extends Component {
           width: '100%',
           maxWidth: '400px',
           boxShadow: '0 0 2px 2px #ddd',
-          display: 'flex'
+          display: 'flex',
         }}
-        >
+      >
         <input
           style={{
             fontSize: '20px',
@@ -38,35 +36,40 @@ export default class InputArea extends Component {
             padding: '10px 4px',
             boxSizing: 'border-box',
             border: '1px solid',
-            borderColor: this.state.words.length < 40 ? this.state.focused ? '#3190e8' : '#999' : '#ff9075',
+            borderColor:
+              this.state.message.length < 40
+                ? this.state.focused
+                  ? '#3190e8'
+                  : '#999'
+                : '#ff9075',
             boxShadow: this.state.focused ? 'inset 0 0 1px 1px #eee' : 'none',
             borderRadius: 0,
             outline: 'none',
           }}
           onFocus={() => {
             this.setState({
-              focused: true
+              focused: true,
             })
           }}
           onBlur={() => {
             this.setState({
-              focused: false
+              focused: false,
             })
           }}
-          onChange={({nativeEvent}) => {
+          onChange={({ nativeEvent }) => {
             this.setState({
-              words: nativeEvent.target.value
+              message: nativeEvent.target.value,
             })
           }}
-          onKeyPress={({nativeEvent}) => {
+          onKeyPress={({ nativeEvent }) => {
             if (nativeEvent.key === 'Enter') {
               this.submitMessage()
             }
           }}
-          placeholder={speaker.hintText}
-          value={this.state.words}
+          placeholder={hintText}
+          value={this.state.message}
           maxLength={40}
-          />
+        />
         <button
           style={{
             height: '50px',
@@ -78,44 +81,45 @@ export default class InputArea extends Component {
             fontSize: '16px',
             color: this.state.buttonActive ? '#f5f5f5' : '#3190e8',
             background: this.state.buttonActive ? '#3190e8' : '#f5f5f5',
-            outline: 'none'
+            outline: 'none',
           }}
-          disabled={speaker.state === Speaker.states.CONNECTING}
+          disabled={disabled}
           onFocus={() => {
             this.setState({
-              buttonActive: true
+              buttonActive: true,
             })
           }}
           onBlur={() => {
             this.setState({
-              buttonActive: false
+              buttonActive: false,
             })
           }}
           onTouchStart={() => {
             this.setState({
-              buttonActive: true
+              buttonActive: true,
             })
           }}
           onTouchEnd={() => {
             this.setState({
-              buttonActive: false
+              buttonActive: false,
             })
           }}
           onMouseDown={() => {
             this.setState({
-              buttonActive: true
+              buttonActive: true,
             })
           }}
           onMouseUp={() => {
             this.setState({
-              buttonActive: false
+              buttonActive: false,
             })
           }}
           onClick={() => {
             this.submitMessage()
           }}
-          children={speaker.actionText}
-          />
+        >
+          {actionText}
+        </button>
       </div>
     )
   }

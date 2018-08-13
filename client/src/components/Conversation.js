@@ -7,21 +7,7 @@ export default class Conversation extends Component {
     this.state= {
       bottomUnlocked: false,
       atBottom: true,
-      conversationLogLength: 0,
       haveUnreadMessage: false
-    }
-  }
-
-  shouldComponentUpdate(props, state) {
-    if (this.state.haveUnreadMessage !== state.haveUnreadMessage) {
-      return true
-    }
-    if (this.props.speaker.conversationLog.length !== state.conversationLogLength) {
-      state.conversationLogLength = props.speaker.conversationLog.length,
-      state.haveUnreadMessage = !this.state.atBottom
-      return true
-    } else {
-      return false
     }
   }
 
@@ -33,8 +19,8 @@ export default class Conversation extends Component {
   }
 
   render() {
-    const {speaker} = this.props
-    const dialogBubbles = speaker.conversationLog.map((speak, i) => <DialogBubble key={i} id={i} speak={speak} />)
+    const { conversationLog } = this.props
+    const dialogBubbles = conversationLog.map((speak, i) => <DialogBubble key={i} id={i} speak={speak} />)
     return (
       <div
         style={{

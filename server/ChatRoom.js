@@ -9,8 +9,8 @@ class ChatRoom {
 
   /**
    * enter(user): user enter as guest or get online again
-   * 
-   * @param {User} user 
+   *
+   * @param {User} user
    * @memberof ChatRoom
    */
   enter(user) {
@@ -27,9 +27,9 @@ class ChatRoom {
 
   /**
    * receive(user, message): receive message from user
-   * 
-   * @param {User} user 
-   * @param {Message} message 
+   *
+   * @param {User} user
+   * @param {Message} message
    * @memberof ChatRoom
    */
   receive(user, message) {
@@ -41,13 +41,14 @@ class ChatRoom {
           this.notify(user, `username '${name}' already exist`)
         } else {
           user.register(name)
+          this.users.set(name, user)
           this.notify(user, `register success`)
-          this.broadcastNotification()
+          this.broadcastNotification(`${name} registered`)
         }
         break
 
       case MESSAGE_TYPES.MESSAGE:
-        this.broadcast(new Message(user, message.content))
+        this.broadcast(new Message({ user, content: message.content }))
         break
 
       case MESSAGE_TYPES.BROADCAST:
@@ -61,8 +62,8 @@ class ChatRoom {
 
   /**
    * leave(user): user leave
-   * 
-   * @param {User} user 
+   *
+   * @param {User} user
    * @memberof ChatRoom
    */
   leave(user) {
@@ -72,10 +73,10 @@ class ChatRoom {
 
   /**
    * send message to one user
-   * 
-   * @param {User} user 
-   * @param {Message} message 
-   * @param {any} [options={}] 
+   *
+   * @param {User} user
+   * @param {Message} message
+   * @param {any} [options={}]
    * @memberof ChatRoom
    */
   send(user, message, options = {}) {
@@ -87,9 +88,9 @@ class ChatRoom {
 
   /**
    * send message to every user
-   * 
-   * @param {Message} message 
-   * @param {any} [options={}] 
+   *
+   * @param {Message} message
+   * @param {any} [options={}]
    * @memberof ChatRoom
    */
   broadcast(message, options = {}) {
@@ -103,9 +104,9 @@ class ChatRoom {
 
   /**
    * send notification to the user
-   * 
-   * @param {User} user 
-   * @param {String} content 
+   *
+   * @param {User} user
+   * @param {String} content
    * @memberof ChatRoom
    */
   notify(user, content) {
@@ -114,8 +115,8 @@ class ChatRoom {
 
   /**
    * send notification to every user
-   * 
-   * @param {String} content 
+   *
+   * @param {String} content
    * @memberof ChatRoom
    */
   broadcastNotification(content) {
