@@ -2,9 +2,12 @@ const ChatRoom = require('./ChatRoom')
 const User = require('./User')
 
 const chatRoom = new ChatRoom()
-const webSocketServer = new (require('ws')).Server({port: 8080})
+const HTTP = require('http')
+const WebSocket = require('ws')
 
-console.log('Server running')
+const server = HTTP.createServer()
+
+const webSocketServer = new WebSocket.Server({ server })
 
 webSocketServer.on('connection', webSocket => {
   console.log('one connection up')
@@ -29,4 +32,9 @@ webSocketServer.on('connection', webSocket => {
         console.error(err)
       }
     })
+})
+
+const port = Number(process.env.PORT) || 8080
+server.listen(port, () => {
+  console.log('Server listening on port', port)
 })

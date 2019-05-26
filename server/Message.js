@@ -8,8 +8,6 @@ const MESSAGE_TYPES = {
 }
 
 class Message {
-  static types = MESSAGE_TYPES
-
   constructor({ user, content, type = MESSAGE_TYPES.MESSAGE }) {
     this.user = user
     this.content = content
@@ -33,8 +31,9 @@ class Message {
   }
 }
 
+Message.types = MESSAGE_TYPES
+
 class ServerBroadcastMessage extends Message {
-  static Server = new User({ name: 'Server' })
   constructor(content) {
     super({
       user: ServerBroadcastMessage.Server,
@@ -43,9 +42,9 @@ class ServerBroadcastMessage extends Message {
     })
   }
 }
+ServerBroadcastMessage.Server = new User({ name: 'Server' })
 
 class ServerNotificationMessage extends Message {
-  static Server = new User({ name: 'Server' })
   constructor(content) {
     super({
       user: ServerBroadcastMessage.Server,
@@ -54,6 +53,7 @@ class ServerNotificationMessage extends Message {
     })
   }
 }
+ServerNotificationMessage.Server = new User({ name: 'Server' })
 
 module.exports = {
   MESSAGE_TYPES,
